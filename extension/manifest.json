@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "UI tree",
+  "description": "HTML graphical tree. UI tree.",
+  "version": "1.0",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["activeTab", "storage"],
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; connect-src https://* data: blob: filesystem:;"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
