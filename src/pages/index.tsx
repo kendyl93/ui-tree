@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ReactFlow from "reactflow";
 // import "reactflow/dist/style.css";
 
-function displayChildTagNamesJSX(domString: string) {
+function displayChildTagNames(domString: any) {
   if (!domString) {
     return;
   }
@@ -13,35 +13,37 @@ function displayChildTagNamesJSX(domString: string) {
   // Set the innerHTML of the container to the provided DOM string
   container.innerHTML = domString;
 
-  // Initialize an array to store JSX elements
-  const jsxElements: any = [];
-
   // Traverse the DOM structure recursively
-  const traverse = (element: any, parentPath = "") => {
+  const traverse = (element: any, depth = 0) => {
+    const jsxElements: any = []; // Initialize the array here to ensure it's reset for each recursion
+
     if (!element || !element.childNodes || element.childNodes.length === 0) {
-      return;
+      return jsxElements; // Return empty array if there are no child nodes
     }
 
     const childNodes = Array.from(element.childNodes);
 
     childNodes.forEach((node: any) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
-        // Build the JSX representation
-        const tagPath = parentPath
-          ? `${parentPath} > ${node.tagName.toLowerCase()}`
-          : node.tagName.toLowerCase();
-        const jsxElement = <div key={tagPath}>{tagPath}</div>; // Or any other JSX structure you prefer
+        // Build the JSX representation with indentation based on depth
+        const tagPath = node.tagName.toLowerCase();
+        const indentation = " ".repeat(depth * 2);
+        const jsxElement = (
+          <div key={tagPath} style={{ marginLeft: `${depth * 10}px` }}>
+            {indentation}
+            {tagPath}
+            {traverse(node, depth + 1)}{" "}
+          </div>
+        );
         jsxElements.push(jsxElement);
-
-        // Recursively traverse the child nodes
-        traverse(node, tagPath);
       }
     });
+
+    return jsxElements; // Return the JSX elements
   };
 
-  traverse(container);
-
-  return jsxElements;
+  // Start the traversal from the root container
+  return traverse(container);
 }
 
 export default function Home() {
@@ -51,15 +53,18 @@ export default function Home() {
     if (chrome.storage) {
       chrome.storage.local.get("documentContent", function (data) {
         setNodes(data.documentContent.content || "");
-        // displayChildTagNames2(data.documentContent.content);
       });
     } else {
       setNodes(window.document.documentElement.outerHTML || "");
       console.error("chrome.storage is not available.");
     }
+
+    return () => {
+      setNodes(null);
+    };
   }, []);
 
-  const jsxTags = displayChildTagNamesJSX(nodes);
+  const jsxTags = displayChildTagNames(nodes);
   console.log({ jsxTags });
 
   return (
