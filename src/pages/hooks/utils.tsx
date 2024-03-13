@@ -2,7 +2,8 @@ import LastChild from "../components/LastChild";
 import ChildWithNodes from "../components/ChildWithNodes";
 
 export const displayChildTagNames = (
-  DOMstringified: string
+  DOMstringified: string,
+  onTagClick: any
 ): React.ReactElement[] => {
   if (!DOMstringified) {
     return [];
@@ -26,9 +27,15 @@ export const displayChildTagNames = (
     childNodes.forEach((node) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
         const elementNode = node as Element;
-
+        console.log({ elementNode });
         if (elementNode.childElementCount === 0) {
-          jsxElements.push(<LastChild element={elementNode} depth={depth} />);
+          jsxElements.push(
+            <LastChild
+              element={elementNode}
+              depth={depth}
+              onTagClick={onTagClick}
+            />
+          );
           return;
         }
 

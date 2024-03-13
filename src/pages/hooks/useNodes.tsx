@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { displayChildTagNames } from "./utils";
 
-export const useNodes = () => {
+export const useNodes = (setActiveTag: any) => {
   const [nodes, setNodes] = useState<string | null>(null);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export const useNodes = () => {
     };
   }, []);
 
-  const jsxTags = displayChildTagNames(nodes ?? "");
+  const jsxTags = displayChildTagNames(nodes ?? "", setActiveTag);
 
   return jsxTags;
 };
