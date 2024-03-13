@@ -9,22 +9,24 @@ export const displayChildTagNames = (
     return [];
   }
 
-  const container = document.createElement("div");
-  container.innerHTML = DOMstringified;
+  // const container = document.createElement("div");
+  // container.innerHTML = DOMstringified;
+  const parser = new DOMParser();
+  const container = parser.parseFromString(DOMstringified, "text/html");
 
   const mapChildNodes = (
-    element: Element | null,
+    element: Element | Document,
     depth = 0
   ): React.ReactElement[] => {
     const jsxElements: React.ReactElement[] = [];
-
+    debugger;
     if (!element) {
       return jsxElements;
     }
 
     const childNodes = Array.from(element.childNodes);
 
-    childNodes.forEach((node) => {
+    childNodes.forEach((node: any) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
         const elementNode = node as Element;
         console.log({ elementNode });

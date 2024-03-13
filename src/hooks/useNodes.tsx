@@ -10,7 +10,8 @@ export const useNodes = (setActiveTag: any) => {
         setNodes(data.documentContent.content || "");
       });
     } else {
-      setNodes(window.document.documentElement.outerHTML || "");
+      console.log({ DUPA: document.documentElement.outerHTML });
+      setNodes(document.documentElement.outerHTML || "");
       console.error("chrome.storage is not available.");
     }
 
