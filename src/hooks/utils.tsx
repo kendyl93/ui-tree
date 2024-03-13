@@ -9,8 +9,6 @@ export const displayChildTagNames = (
     return [];
   }
 
-  // const container = document.createElement("div");
-  // container.innerHTML = DOMstringified;
   const parser = new DOMParser();
   const container = parser.parseFromString(DOMstringified, "text/html");
 
@@ -19,7 +17,7 @@ export const displayChildTagNames = (
     depth = 0
   ): React.ReactElement[] => {
     const jsxElements: React.ReactElement[] = [];
-    debugger;
+
     if (!element) {
       return jsxElements;
     }

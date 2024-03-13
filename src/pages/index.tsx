@@ -5,7 +5,7 @@ import { useNodes } from "../hooks/useNodes";
 export default function Home() {
   const [activeTag, setActiveTag] = useState<any>(null);
   const handleTagClick = async (e: any, tag?: any) => {
-    if(!tag){
+    if (!tag) {
       return;
     }
     setActiveTag({ innerHTML: tag.innerHTML, outerHTML: tag.outerHTML });
@@ -13,7 +13,7 @@ export default function Home() {
   const jsxTags = useNodes(handleTagClick);
 
   return (
-    <main style={{ width: "500px", height: "500px" }}>
+    <div className="p-7 bg-gray-200">
       {activeTag && (
         <div
           style={{
@@ -23,25 +23,19 @@ export default function Home() {
             border: "solid 1px red",
             right: "10px",
             top: "10px",
-            background: '#fff'
+            backgroundColor: "#ccc",
           }}
         >
           {activeTag.outerHTML}
-          {/* <CopyBlock ERROR
-            text={activeTag.outerHTML}
-            language="html"
-            wrapLongLines={true}
-          /> */}
         </div>
       )}
-      <ul>
-        <li>TEST</li>
-      </ul>
-      <button>click me</button>
-      <div>{jsxTags}</div>
-      {/* <div style={{ width: "500px", height: "500px" }}>
-        <ReactFlow nodes={initialNodes} edges={initialEdges} />
-      </div> */}
-    </main>
+      <div>
+        <ul>
+          <li>TEST</li>
+        </ul>
+        <button>click me</button>
+        <div className="m-7">{jsxTags}</div>
+      </div>
+    </div>
   );
 }
