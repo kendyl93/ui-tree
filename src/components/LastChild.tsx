@@ -8,9 +8,11 @@ const LastChild = ({ element, depth, onTagClick }: LastChildProps) => {
   const tagPath = element.tagName.toLowerCase();
   return (
     <div
-      onClick={(e: any) =>
-        onTagClick(e, tagPath !== "script" && tagPath !== "style" && element)
-      }
+      onClick={(e: any) => {
+        if (tagPath !== "script" && tagPath !== "style") {
+          onTagClick(e, element);
+        }
+      }}
       style={{ marginLeft: `${depth * 10}px` }}
       key={`empty-${tagPath}`}
     >

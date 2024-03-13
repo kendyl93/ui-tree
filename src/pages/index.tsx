@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CopyBlock } from "react-code-blocks";
-import { useNodes } from "./hooks/useNodes";
+import { useNodes } from "../hooks/useNodes";
 
 export default function Home() {
   const [activeTag, setActiveTag] = useState<any>(null);
@@ -17,19 +17,21 @@ export default function Home() {
       {activeTag && (
         <div
           style={{
-            position: "absolute",
+            position: "fixed",
             width: "300px",
             height: "200px",
             border: "solid 1px red",
             right: "10px",
             top: "10px",
+            background: '#fff'
           }}
         >
-          <CopyBlock
+          {activeTag.outerHTML}
+          {/* <CopyBlock ERROR
             text={activeTag.outerHTML}
             language="html"
             wrapLongLines={true}
-          />
+          /> */}
         </div>
       )}
       <ul>
