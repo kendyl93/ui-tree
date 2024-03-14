@@ -12,6 +12,8 @@ export default function Home() {
   };
   const jsxTags = useNodes(handleTagClick);
 
+  console.log({ jsxTags });
+
   return (
     <div className="p-7 bg-gray-200">
       {activeTag && (
@@ -33,6 +35,18 @@ export default function Home() {
         <ul>
           <li>TEST</li>
         </ul>
+        <div>
+          <div>
+            first
+            <span>
+              <div>asd</div>
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <div>second</div>
+        </div>
         <button>click me</button>
         <div className="m-7">{jsxTags}</div>
       </div>

@@ -1,0 +1,6 @@
+.dupa::after {
+  height: var(--nextSibling);
+  top: 0;
+  position: absolute;
+  left: -36px;
+}

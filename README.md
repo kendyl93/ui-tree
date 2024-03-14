@@ -39,7 +39,9 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-
 ## TODO:
 
 - Create postbuild script to update `/_next/static/` to `/next/static` in `index.html`
+- Double check if Active tab DOM works!
+- Update CSS
+- Make hover css node

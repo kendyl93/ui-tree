@@ -27,7 +27,7 @@ export const displayChildTagNames = (
     childNodes.forEach((node: any) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
         const elementNode = node as Element;
-        console.log({ elementNode });
+
         if (elementNode.childElementCount === 0) {
           jsxElements.push(
             <LastChild
